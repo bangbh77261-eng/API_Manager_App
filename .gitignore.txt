@@ -1,0 +1,16 @@
+# ===== Build outputs =====
+bin/
+obj/
+
+# ===== Visual Studio build/cache =====
+.vs/
+
+# ===== Rider / VS Code (nếu có) =====
+.idea/
+.vscode/
+
+# ===== User-specific build files =====
+*.user
+*.suo
+*.cache
+*.log
