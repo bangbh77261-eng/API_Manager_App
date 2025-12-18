@@ -1,0 +1,797 @@
+﻿-- ============================================= 
+-- INVENTORY MANAGEMENT SYSTEM DATABASE
+-- SQL Server Implementation
+-- =============================================
+
+USE master;
+GO
+
+-- Create Database
+IF EXISTS (SELECT name FROM sys.databases WHERE name = 'InventoryManagementDB')
+BEGIN
+    ALTER DATABASE InventoryManagementDB SET SINGLE_USER WITH ROLLBACK IMMEDIATE;
+    DROP DATABASE InventoryManagementDB;
+END
+GO
+
+CREATE DATABASE InventoryManagementDB;
+GO
+
+USE InventoryManagementDB;
+GO
+
+-- =============================================
+-- 1. USER MANAGEMENT TABLES
+-- =============================================
+
+-- Level User (Customer Tier)
+CREATE TABLE LevelUser (
+    LevelID INT PRIMARY KEY IDENTITY(1,1),
+    LevelCode NVARCHAR(50) NOT NULL UNIQUE,
+    LevelName NVARCHAR(100) NOT NULL,
+    LevelValue INT NOT NULL DEFAULT 1,
+    DiscountPercent DECIMAL(5,2) DEFAULT 0,
+    MinPurchaseForDiscount DECIMAL(18,2) DEFAULT 0,
+    MinTotalPurchaseForUpgrade DECIMAL(18,2) NOT NULL,
+    CreatedDate DATETIME DEFAULT GETDATE(),
+    UpdatedDate DATETIME DEFAULT GETDATE(),
+    CONSTRAINT CHK_DiscountPercent CHECK (DiscountPercent BETWEEN 0 AND 100)
+);
+
+-- User Key (Main User)
+CREATE TABLE UserKey (
+    UserID INT PRIMARY KEY IDENTITY(1,1),
+    CMND NVARCHAR(20) UNIQUE,
+    Age INT,
+    Gender NVARCHAR(10),
+    DateOfBirth DATE,
+    Email NVARCHAR(100) UNIQUE NOT NULL,
+    IsEmailVerified BIT DEFAULT 0,
+    PasswordHash NVARCHAR(255) NOT NULL,
+    FullName NVARCHAR(200) NOT NULL,
+    PhoneNumber NVARCHAR(20),
+    Avatar NVARCHAR(500),
+    LanguageSave NVARCHAR(10) DEFAULT 'vi-VN',
+    CreatedDate DATETIME DEFAULT GETDATE(),
+    LastLoginDate DATETIME,
+    Address NVARCHAR(500),
+    LevelID INT,
+    IsActive BIT DEFAULT 1,
+    CONSTRAINT FK_UserKey_Level FOREIGN KEY (LevelID) REFERENCES LevelUser(LevelID)
+);
+
+-- User Roles (System Permissions)
+CREATE TABLE UserRole (
+    RoleID INT PRIMARY KEY IDENTITY(1,1),
+    RoleName NVARCHAR(100) NOT NULL,
+    RoleCode NVARCHAR(50) NOT NULL UNIQUE,
+    RoleDescription NVARCHAR(500),
+    RoleGroup NVARCHAR(100),
+    CreatedDate DATETIME DEFAULT GETDATE(),
+    IsActive BIT DEFAULT 1
+);
+
+-- User Role Assignment
+CREATE TABLE UserRoleAssignment (
+    AssignmentID INT PRIMARY KEY IDENTITY(1,1),
+    UserID INT NOT NULL,
+    RoleID INT NOT NULL,
+    IsActive BIT DEFAULT 1,
+    AssignedDate DATETIME DEFAULT GETDATE(),
+    CONSTRAINT FK_Assignment_User FOREIGN KEY (UserID) REFERENCES UserKey(UserID),
+    CONSTRAINT FK_Assignment_Role FOREIGN KEY (RoleID) REFERENCES UserRole(RoleID),
+    CONSTRAINT UQ_UserRole UNIQUE (UserID, RoleID)
+);
+
+-- =============================================
+-- 2. CUSTOMER MANAGEMENT
+-- =============================================
+
+CREATE TABLE Customer (
+    CustomerID INT PRIMARY KEY IDENTITY(1,1),
+    CustomerCode NVARCHAR(50) NOT NULL UNIQUE,
+    CustomerName NVARCHAR(200) NOT NULL,
+    PhoneNumber NVARCHAR(20),
+    TaxCode NVARCHAR(50),
+    Address NVARCHAR(500),
+    Email NVARCHAR(100),
+    IDNumber NVARCHAR(20),
+    CustomerType NVARCHAR(50) DEFAULT N'Cá nhân',
+    CreatedDate DATETIME DEFAULT GETDATE(),
+    IsActive BIT DEFAULT 1,
+    LevelID INT,
+    TotalPurchaseAmount DECIMAL(18,2) DEFAULT 0,
+    CONSTRAINT FK_Customer_Level FOREIGN KEY (LevelID) REFERENCES LevelUser(LevelID)
+);
+
+-- =============================================
+-- 3. SUPPLIER MANAGEMENT
+-- =============================================
+
+CREATE TABLE Supplier (
+    SupplierID INT PRIMARY KEY IDENTITY(1,1),
+    SupplierCode NVARCHAR(50) NOT NULL UNIQUE,
+    SupplierName NVARCHAR(200) NOT NULL,
+    Address NVARCHAR(500),
+    TaxCode NVARCHAR(50),
+    PhoneNumber NVARCHAR(20),
+    Hotline NVARCHAR(20),
+    Representative NVARCHAR(200),
+    RepresentativeIDNumber NVARCHAR(20),
+    Email NVARCHAR(100),
+    CreatedDate DATETIME DEFAULT GETDATE(),
+    IsActive BIT DEFAULT 1
+);
+
+-- =============================================
+-- 4. EMPLOYEE MANAGEMENT
+-- =============================================
+
+CREATE TABLE Employee (
+    EmployeeID INT PRIMARY KEY IDENTITY(1,1),
+    EmployeeCode NVARCHAR(50) NOT NULL UNIQUE,
+    FullName NVARCHAR(200) NOT NULL,
+    Address NVARCHAR(500),
+    PhoneNumber NVARCHAR(20),
+    Age INT,
+    IDNumber NVARCHAR(20),
+    TaxCode NVARCHAR(50),
+    StartDate DATE NOT NULL,
+    WorkingYears AS (DATEDIFF(YEAR, StartDate, GETDATE())),
+    WorkingMonths AS (DATEDIFF(MONTH, StartDate, GETDATE())),
+    IsActive BIT DEFAULT 1,
+    CreatedDate DATETIME DEFAULT GETDATE()
+);
+
+-- =============================================
+-- 5. WAREHOUSE & LOCATION
+-- =============================================
+
+CREATE TABLE Warehouse (
+    WarehouseID INT PRIMARY KEY IDENTITY(1,1),
+    WarehouseCode NVARCHAR(50) NOT NULL UNIQUE,
+    WarehouseName NVARCHAR(200) NOT NULL,
+    Address NVARCHAR(500),
+    PhoneNumber NVARCHAR(20),
+    ManagerName NVARCHAR(200),
+    IsActive BIT DEFAULT 1,
+    CreatedDate DATETIME DEFAULT GETDATE()
+);
+
+CREATE TABLE StorageLocation (
+    LocationID INT PRIMARY KEY IDENTITY(1,1),
+    WarehouseID INT NOT NULL,
+    LocationCode NVARCHAR(50) NOT NULL,
+    LocationName NVARCHAR(100) NOT NULL,
+    Description NVARCHAR(500),
+    CONSTRAINT FK_Location_Warehouse FOREIGN KEY (WarehouseID) REFERENCES Warehouse(WarehouseID),
+    CONSTRAINT UQ_LocationCode UNIQUE (WarehouseID, LocationCode)
+);
+
+-- =============================================
+-- 6. PRODUCT MANAGEMENT
+-- =============================================
+
+CREATE TABLE ProductCategory (
+    CategoryID INT PRIMARY KEY IDENTITY(1,1),
+    CategoryCode NVARCHAR(50) NOT NULL UNIQUE,
+    CategoryName NVARCHAR(200) NOT NULL,
+    Description NVARCHAR(500),
+    IsActive BIT DEFAULT 1
+);
+
+CREATE TABLE Product (
+    ProductID INT PRIMARY KEY IDENTITY(1,1),
+    ProductCode NVARCHAR(50) NOT NULL UNIQUE,
+    ProductName NVARCHAR(200) NOT NULL,
+    ManufactureDate DATE,
+    ExpiryDate DATE,
+    ManufactureLocation NVARCHAR(200),
+    CategoryID INT,
+    UnitPrice DECIMAL(18,2) NOT NULL,
+    VAT DECIMAL(5,2) DEFAULT 0,
+    Barcode NVARCHAR(200),
+    CurrentLocationID INT,
+    Description NVARCHAR(1000),
+    ImageURL NVARCHAR(500),
+    CreatedDate DATETIME DEFAULT GETDATE(),
+    UpdatedDate DATETIME DEFAULT GETDATE(),
+    IsActive BIT DEFAULT 1,
+    CONSTRAINT FK_Product_Category FOREIGN KEY (CategoryID) REFERENCES ProductCategory(CategoryID),
+    CONSTRAINT FK_Product_Location FOREIGN KEY (CurrentLocationID) REFERENCES StorageLocation(LocationID),
+    CONSTRAINT CHK_ExpiryDate CHECK (ExpiryDate IS NULL OR ExpiryDate >= ManufactureDate)
+);
+
+-- =============================================
+-- 7. INVENTORY MANAGEMENT
+-- =============================================
+
+CREATE TABLE Inventory (
+    InventoryID INT PRIMARY KEY IDENTITY(1,1),
+    WarehouseID INT NOT NULL,
+    ProductID INT NOT NULL,
+    TotalQuantityIn INT DEFAULT 0,
+    TotalQuantityOut INT DEFAULT 0,
+    DamagedQuantity INT DEFAULT 0,
+    ActualQuantity AS (TotalQuantityIn - TotalQuantityOut - DamagedQuantity) PERSISTED,
+    LastUpdated DATETIME DEFAULT GETDATE(),
+    Notes NVARCHAR(500),
+    CONSTRAINT FK_Inventory_Warehouse FOREIGN KEY (WarehouseID) REFERENCES Warehouse(WarehouseID),
+    CONSTRAINT FK_Inventory_Product FOREIGN KEY (ProductID) REFERENCES Product(ProductID),
+    CONSTRAINT UQ_WarehouseProduct UNIQUE (WarehouseID, ProductID),
+    CONSTRAINT CHK_Quantities CHECK (TotalQuantityIn >= 0 AND TotalQuantityOut >= 0 AND DamagedQuantity >= 0)
+);
+
+-- =============================================
+-- 8. GOODS RECEIPT (PHIẾU NHẬP)
+-- =============================================
+
+CREATE TABLE GoodsReceipt (
+    ReceiptID INT PRIMARY KEY IDENTITY(1,1),
+    ReceiptCode NVARCHAR(50) NOT NULL UNIQUE,
+    ReceiptDate DATE NOT NULL DEFAULT CAST(GETDATE() AS DATE),
+    SupplierID INT NOT NULL,
+    EmployeeID INT NOT NULL,
+    WarehouseID INT NOT NULL,
+    TotalAmount DECIMAL(18,2) DEFAULT 0,
+    Notes NVARCHAR(1000),
+    Status NVARCHAR(50) DEFAULT N'Đã nhập',
+    CreatedDate DATETIME DEFAULT GETDATE(),
+    CreatedBy INT,
+    CONSTRAINT FK_Receipt_Supplier FOREIGN KEY (SupplierID) REFERENCES Supplier(SupplierID),
+    CONSTRAINT FK_Receipt_Employee FOREIGN KEY (EmployeeID) REFERENCES Employee(EmployeeID),
+    CONSTRAINT FK_Receipt_Warehouse FOREIGN KEY (WarehouseID) REFERENCES Warehouse(WarehouseID)
+);
+
+CREATE TABLE GoodsReceiptDetail (
+    DetailID INT PRIMARY KEY IDENTITY(1,1),
+    ReceiptID INT NOT NULL,
+    ProductID INT NOT NULL,
+    Quantity INT NOT NULL,
+    UnitPrice DECIMAL(18,2) NOT NULL,
+    VAT DECIMAL(5,2) DEFAULT 0,
+    TotalAmount AS (Quantity * UnitPrice * (1 + VAT/100)) PERSISTED,
+    InvoiceNumber NVARCHAR(100),
+    Notes NVARCHAR(500),
+    CreatedDate DATETIME DEFAULT GETDATE(),
+    CONSTRAINT FK_ReceiptDetail_Receipt FOREIGN KEY (ReceiptID) REFERENCES GoodsReceipt(ReceiptID) ON DELETE CASCADE,
+    CONSTRAINT FK_ReceiptDetail_Product FOREIGN KEY (ProductID) REFERENCES Product(ProductID),
+    CONSTRAINT CHK_ReceiptQuantity CHECK (Quantity > 0)
+);
+
+-- =============================================
+-- 9. GOODS ISSUE (PHIẾU XUẤT)
+-- =============================================
+
+CREATE TABLE GoodsIssue (
+    IssueID INT PRIMARY KEY IDENTITY(1,1),
+    IssueCode NVARCHAR(50) NOT NULL UNIQUE,
+    IssueDate DATE NOT NULL DEFAULT CAST(GETDATE() AS DATE),
+    EmployeeID INT NOT NULL,
+    CustomerID INT,
+    RecipientName NVARCHAR(200),
+    RecipientPhone NVARCHAR(20),
+    WarehouseID INT NOT NULL,
+    TotalAmount DECIMAL(18,2) DEFAULT 0,
+    Notes NVARCHAR(1000),
+    Status NVARCHAR(50) DEFAULT N'Đã xuất',
+    CreatedDate DATETIME DEFAULT GETDATE(),
+    CreatedBy INT,
+    CONSTRAINT FK_Issue_Employee FOREIGN KEY (EmployeeID) REFERENCES Employee(EmployeeID),
+    CONSTRAINT FK_Issue_Customer FOREIGN KEY (CustomerID) REFERENCES Customer(CustomerID),
+    CONSTRAINT FK_Issue_Warehouse FOREIGN KEY (WarehouseID) REFERENCES Warehouse(WarehouseID)
+);
+
+CREATE TABLE GoodsIssueDetail (
+    DetailID INT PRIMARY KEY IDENTITY(1,1),
+    IssueID INT NOT NULL,
+    ProductID INT NOT NULL,
+    Quantity INT NOT NULL,
+    UnitPrice DECIMAL(18,2) NOT NULL,
+    VAT DECIMAL(5,2) DEFAULT 0,
+    TotalAmount AS (Quantity * UnitPrice * (1 + VAT/100)) PERSISTED,
+    InvoiceNumber NVARCHAR(100),
+    Notes NVARCHAR(500),
+    CreatedDate DATETIME DEFAULT GETDATE(),
+    CONSTRAINT FK_IssueDetail_Issue FOREIGN KEY (IssueID) REFERENCES GoodsIssue(IssueID) ON DELETE CASCADE,
+    CONSTRAINT FK_IssueDetail_Product FOREIGN KEY (ProductID) REFERENCES Product(ProductID),
+    CONSTRAINT CHK_IssueQuantity CHECK (Quantity > 0)
+);
+
+-- =============================================
+-- 10. SALES & REVENUE TRACKING
+-- =============================================
+
+CREATE TABLE SalesTransaction (
+    TransactionID INT PRIMARY KEY IDENTITY(1,1),
+    TransactionCode NVARCHAR(50) NOT NULL UNIQUE,
+    TransactionDate DATETIME DEFAULT GETDATE(),
+    CustomerID INT,
+    EmployeeID INT,
+    TotalAmount DECIMAL(18,2) NOT NULL,
+    DiscountAmount DECIMAL(18,2) DEFAULT 0,
+    FinalAmount AS (TotalAmount - DiscountAmount) PERSISTED,
+    PaymentMethod NVARCHAR(50),
+    Status NVARCHAR(50) DEFAULT N'Hoàn thành',
+    Notes NVARCHAR(1000),
+    CONSTRAINT FK_Transaction_Customer FOREIGN KEY (CustomerID) REFERENCES Customer(CustomerID),
+    CONSTRAINT FK_Transaction_Employee FOREIGN KEY (EmployeeID) REFERENCES Employee(EmployeeID)
+);
+
+-- =============================================
+-- INDEXES FOR PERFORMANCE
+-- =============================================
+
+CREATE NONCLUSTERED INDEX IX_Product_Category ON Product(CategoryID);
+CREATE NONCLUSTERED INDEX IX_Product_Barcode ON Product(Barcode);
+CREATE NONCLUSTERED INDEX IX_Inventory_Product ON Inventory(ProductID);
+CREATE NONCLUSTERED INDEX IX_Receipt_Date ON GoodsReceipt(ReceiptDate);
+CREATE NONCLUSTERED INDEX IX_Issue_Date ON GoodsIssue(IssueDate);
+CREATE NONCLUSTERED INDEX IX_Customer_Code ON Customer(CustomerCode);
+CREATE NONCLUSTERED INDEX IX_Employee_Code ON Employee(EmployeeCode);
+CREATE NONCLUSTERED INDEX IX_Transaction_Date ON SalesTransaction(TransactionDate);
+CREATE NONCLUSTERED INDEX IX_Transaction_Customer ON SalesTransaction(CustomerID);
+
+-- =============================================
+-- VIEWS
+-- =============================================
+
+-- View: Product with Inventory Status
+GO
+CREATE VIEW vw_ProductInventoryStatus AS
+SELECT 
+    p.ProductID,
+    p.ProductCode,
+    p.ProductName,
+    p.Barcode,
+    pc.CategoryName,
+    p.UnitPrice,
+    p.VAT,
+    ISNULL(SUM(i.ActualQuantity), 0) AS TotalStock,
+    CASE 
+        WHEN ISNULL(SUM(i.ActualQuantity), 0) > 0 THEN N'Còn hàng'
+        ELSE N'Hết hàng'
+    END AS StockStatus,
+    sl.LocationName AS CurrentLocation,
+    w.WarehouseName,
+    p.ManufactureDate,
+    p.ExpiryDate,
+    p.Description
+FROM Product p
+LEFT JOIN ProductCategory pc ON p.CategoryID = pc.CategoryID
+LEFT JOIN Inventory i ON p.ProductID = i.ProductID
+LEFT JOIN StorageLocation sl ON p.CurrentLocationID = sl.LocationID
+LEFT JOIN Warehouse w ON sl.WarehouseID = w.WarehouseID
+WHERE p.IsActive = 1
+GROUP BY 
+    p.ProductID, p.ProductCode, p.ProductName, p.Barcode, pc.CategoryName,
+    p.UnitPrice, p.VAT, sl.LocationName, w.WarehouseName,
+    p.ManufactureDate, p.ExpiryDate, p.Description;
+GO
+
+-- View: User with Roles and Levels
+CREATE VIEW vw_UserCompleteInfo AS
+SELECT 
+    -- Thông tin từ UserKey
+    uk.UserID,
+    uk.CMND,
+    uk.Age,
+    uk.Gender,
+    uk.DateOfBirth,
+    uk.Email,
+    uk.IsEmailVerified,
+    uk.PasswordHash,
+    uk.FullName,
+    uk.PhoneNumber,
+    uk.Avatar,
+    uk.LanguageSave,
+    uk.CreatedDate AS UserCreatedDate,
+    uk.LastLoginDate,
+    uk.Address,
+    uk.LevelID,
+    uk.IsActive AS UserIsActive,
+    
+    -- Thông tin từ LevelUser
+    lu.LevelCode,
+    lu.LevelName,
+    lu.LevelValue,
+    lu.DiscountPercent,
+    lu.MinPurchaseForDiscount,
+    lu.MinTotalPurchaseForUpgrade,
+    lu.CreatedDate AS LevelCreatedDate,
+    lu.UpdatedDate AS LevelUpdatedDate,
+    
+    -- Thông tin từ UserRoleAssignment
+    ura.AssignmentID,
+    ura.RoleID,
+    ura.IsActive AS AssignmentIsActive,
+    ura.AssignedDate,
+    
+    -- Thông tin từ UserRole
+    ur.RoleName,
+    ur.RoleCode,
+    ur.RoleDescription,
+    ur.RoleGroup,
+    ur.CreatedDate AS RoleCreatedDate,
+    ur.IsActive AS RoleIsActive
+    
+FROM UserKey uk
+LEFT JOIN LevelUser lu ON uk.LevelID = lu.LevelID
+LEFT JOIN UserRoleAssignment ura ON uk.UserID = ura.UserID
+LEFT JOIN UserRole ur ON ura.RoleID = ur.RoleID;
+
+GO
+
+AGG(ur.RoleCode, ', ') WITHIN GROUP (ORDER BY ur.RoleCode) AS RoleCodes,
+    COUNT(DISTINCT ura.RoleID) AS TotalRoles
+    
+FROM UserKey uk
+LEFT JOIN LevelUser lu ON uk.LevelID = lu.LevelID
+LEFT JOIN UserRoleAssignment ura ON uk.UserID = ura.UserID AND ura.IsActive = 1
+LEFT JOIN UserRole ur ON ura.RoleID = ur.RoleID AND ur.IsActive = 1
+GROUP BY 
+    uk.UserID,
+    uk.FullName,
+    uk.Email,
+    uk.PhoneNumber,
+    uk.IsActive,
+    lu.LevelCode,
+    lu.LevelName,
+    lu.LevelValue,
+    lu.DiscountPercent;
+
+GO
+
+-- View: Goods Receipt Summary
+GO
+CREATE VIEW vw_GoodsReceiptSummary AS
+SELECT 
+    gr.ReceiptID,
+    gr.ReceiptCode,
+    gr.ReceiptDate,
+    s.SupplierName,
+    e.FullName AS EmployeeName,
+    w.WarehouseName,
+    COUNT(grd.DetailID) AS TotalItems,
+    ISNULL(SUM(grd.TotalAmount), 0) AS TotalAmount,
+    gr.Status,
+    gr.CreatedDate
+FROM GoodsReceipt gr
+LEFT JOIN Supplier s ON gr.SupplierID = s.SupplierID
+LEFT JOIN Employee e ON gr.EmployeeID = e.EmployeeID
+LEFT JOIN Warehouse w ON gr.WarehouseID = w.WarehouseID
+LEFT JOIN GoodsReceiptDetail grd ON gr.ReceiptID = grd.ReceiptID
+GROUP BY 
+    gr.ReceiptID, gr.ReceiptCode, gr.ReceiptDate, s.SupplierName,
+    e.FullName, w.WarehouseName, gr.Status, gr.CreatedDate;
+GO
+
+-- View: Goods Issue Summary
+GO
+CREATE VIEW vw_GoodsIssueSummary AS
+SELECT 
+    gi.IssueID,
+    gi.IssueCode,
+    gi.IssueDate,
+    c.CustomerName,
+    gi.RecipientName,
+    e.FullName AS EmployeeName,
+    w.WarehouseName,
+    COUNT(gid.DetailID) AS TotalItems,
+    ISNULL(SUM(gid.TotalAmount), 0) AS TotalAmount,
+    gi.Status,
+    gi.CreatedDate
+FROM GoodsIssue gi
+LEFT JOIN Customer c ON gi.CustomerID = c.CustomerID
+LEFT JOIN Employee e ON gi.EmployeeID = e.EmployeeID
+LEFT JOIN Warehouse w ON gi.WarehouseID = w.WarehouseID
+LEFT JOIN GoodsIssueDetail gid ON gi.IssueID = gid.IssueID
+GROUP BY 
+    gi.IssueID, gi.IssueCode, gi.IssueDate, c.CustomerName,
+    gi.RecipientName, e.FullName, w.WarehouseName, gi.Status, gi.CreatedDate;
+GO
+
+-- =============================================
+-- TRIGGERS
+-- =============================================
+
+-- Trigger: Auto-generate Barcode and Invoice Number for Product
+GO
+CREATE TRIGGER trg_GenerateBarcode_Product
+ON Product
+AFTER INSERT, UPDATE
+AS
+BEGIN
+    SET NOCOUNT ON;
+    
+    UPDATE p
+    SET Barcode = i.ProductCode + '-' + CAST(CAST(i.UnitPrice AS INT) AS NVARCHAR) + '-' + FORMAT(i.CreatedDate, 'yyyyMMdd')
+    FROM Product p
+    INNER JOIN inserted i ON p.ProductID = i.ProductID
+    WHERE p.Barcode IS NULL OR UPDATE(UnitPrice) OR UPDATE(ProductCode);
+END;
+GO
+
+-- Trigger: Generate Invoice Number for Receipt Detail
+GO
+CREATE TRIGGER trg_GenerateInvoiceNumber_ReceiptDetail
+ON GoodsReceiptDetail
+AFTER INSERT
+AS
+BEGIN
+    SET NOCOUNT ON;
+    
+    UPDATE grd
+    SET InvoiceNumber = 'RCP-' + CAST(i.ProductID AS NVARCHAR) + '-' + FORMAT(GETDATE(), 'yyyyMMdd') + '-' + CAST(i.Quantity AS NVARCHAR)
+    FROM GoodsReceiptDetail grd
+    INNER JOIN inserted i ON grd.DetailID = i.DetailID;
+END;
+GO
+
+-- Trigger: Generate Invoice Number for Issue Detail
+GO
+CREATE TRIGGER trg_GenerateInvoiceNumber_IssueDetail
+ON GoodsIssueDetail
+AFTER INSERT
+AS
+BEGIN
+    SET NOCOUNT ON;
+    
+    UPDATE gid
+    SET InvoiceNumber = 'ISU-' + CAST(i.ProductID AS NVARCHAR) + '-' + FORMAT(GETDATE(), 'yyyyMMdd') + '-' + CAST(i.Quantity AS NVARCHAR)
+    FROM GoodsIssueDetail gid
+    INNER JOIN inserted i ON gid.DetailID = i.DetailID;
+END;
+GO
+
+-- Trigger: Update Inventory on Goods Receipt
+GO
+CREATE TRIGGER trg_UpdateInventory_OnReceipt
+ON GoodsReceiptDetail
+AFTER INSERT
+AS
+BEGIN
+    SET NOCOUNT ON;
+    
+    UPDATE i
+    SET 
+        TotalQuantityIn = i.TotalQuantityIn + ins.Quantity,
+        LastUpdated = GETDATE()
+    FROM Inventory i
+    INNER JOIN inserted ins ON i.ProductID = ins.ProductID
+    INNER JOIN GoodsReceipt gr ON ins.ReceiptID = gr.ReceiptID
+    WHERE i.WarehouseID = gr.WarehouseID;
+    
+    -- Insert if not exists
+    INSERT INTO Inventory (WarehouseID, ProductID, TotalQuantityIn)
+    SELECT gr.WarehouseID, ins.ProductID, ins.Quantity
+    FROM inserted ins
+    INNER JOIN GoodsReceipt gr ON ins.ReceiptID = gr.ReceiptID
+    WHERE NOT EXISTS (
+        SELECT 1 FROM Inventory i 
+        WHERE i.WarehouseID = gr.WarehouseID 
+        AND i.ProductID = ins.ProductID
+    );
+END;
+GO
+
+-- Trigger: Update Inventory on Goods Issue
+GO
+CREATE TRIGGER trg_UpdateInventory_OnIssue
+ON GoodsIssueDetail
+AFTER INSERT
+AS
+BEGIN
+    SET NOCOUNT ON;
+    
+    UPDATE i
+    SET 
+        TotalQuantityOut = i.TotalQuantityOut + ins.Quantity,
+        LastUpdated = GETDATE()
+    FROM Inventory i
+    INNER JOIN inserted ins ON i.ProductID = ins.ProductID
+    INNER JOIN GoodsIssue gi ON ins.IssueID = gi.IssueID
+    WHERE i.WarehouseID = gi.WarehouseID;
+END;
+GO
+
+-- Trigger: Calculate Age from Date of Birth
+GO
+CREATE TRIGGER trg_CalculateAge_UserKey
+ON UserKey
+AFTER INSERT, UPDATE
+AS
+BEGIN
+    SET NOCOUNT ON;
+    
+    UPDATE UserKey
+    SET Age = DATEDIFF(YEAR, i.DateOfBirth, GETDATE()) -
+              CASE 
+                  WHEN MONTH(i.DateOfBirth) > MONTH(GETDATE()) OR 
+                       (MONTH(i.DateOfBirth) = MONTH(GETDATE()) AND DAY(i.DateOfBirth) > DAY(GETDATE()))
+                  THEN 1
+                  ELSE 0
+              END
+    FROM UserKey u
+    INNER JOIN inserted i ON u.UserID = i.UserID
+    WHERE i.DateOfBirth IS NOT NULL;
+END;
+GO
+
+-- Trigger: Upgrade Customer Level Based on Purchase
+GO
+CREATE TRIGGER trg_UpgradeCustomerLevel
+ON SalesTransaction
+AFTER INSERT, UPDATE
+AS
+BEGIN
+    SET NOCOUNT ON;
+    
+    DECLARE @CustomerID INT;
+    DECLARE @TotalPurchase DECIMAL(18,2);
+    DECLARE @CurrentLevelID INT;
+    DECLARE @NewLevelID INT;
+    
+    SELECT @CustomerID = CustomerID, @TotalPurchase = FinalAmount
+    FROM inserted;
+    
+    -- Update total purchase amount
+    UPDATE Customer
+    SET TotalPurchaseAmount = TotalPurchaseAmount + @TotalPurchase
+    WHERE CustomerID = @CustomerID;
+    
+    -- Get customer's current level and total purchase
+    SELECT 
+        @CurrentLevelID = c.LevelID,
+        @TotalPurchase = c.TotalPurchaseAmount
+    FROM Customer c
+    WHERE c.CustomerID = @CustomerID;
+    
+    -- Find appropriate level
+    SELECT TOP 1 @NewLevelID = LevelID
+    FROM LevelUser
+    WHERE MinTotalPurchaseForUpgrade <= @TotalPurchase
+    ORDER BY MinTotalPurchaseForUpgrade DESC;
+    
+    -- Update customer level if changed
+    IF @NewLevelID IS NOT NULL AND @NewLevelID <> ISNULL(@CurrentLevelID, 0)
+    BEGIN
+        UPDATE Customer
+        SET LevelID = @NewLevelID
+        WHERE CustomerID = @CustomerID;
+    END;
+END;
+GO
+
+-- =============================================
+-- STORED PROCEDURES FOR ANALYTICS
+-- =============================================
+
+-- SP: Monthly Revenue Report
+GO
+CREATE PROCEDURE sp_MonthlyRevenue
+    @Year INT,
+    @Month INT
+AS
+BEGIN
+    SELECT 
+        YEAR(TransactionDate) AS Year,
+        MONTH(TransactionDate) AS Month,
+        COUNT(*) AS TotalTransactions,
+        SUM(TotalAmount) AS GrossRevenue,
+        SUM(DiscountAmount) AS TotalDiscount,
+        SUM(FinalAmount) AS NetRevenue
+    FROM SalesTransaction
+    WHERE YEAR(TransactionDate) = @Year
+        AND MONTH(TransactionDate) = @Month
+        AND Status = N'Hoàn thành'
+    GROUP BY YEAR(TransactionDate), MONTH(TransactionDate);
+END;
+GO
+
+-- SP: Weekly Revenue Report
+GO
+CREATE PROCEDURE sp_WeeklyRevenue
+    @StartDate DATE,
+    @EndDate DATE
+AS
+BEGIN
+    SELECT 
+        DATEPART(WEEK, TransactionDate) AS WeekNumber,
+        MIN(TransactionDate) AS WeekStart,
+        MAX(TransactionDate) AS WeekEnd,
+        COUNT(*) AS TotalTransactions,
+        SUM(FinalAmount) AS TotalRevenue
+    FROM SalesTransaction
+    WHERE TransactionDate BETWEEN @StartDate AND @EndDate
+        AND Status = N'Hoàn thành'
+    GROUP BY DATEPART(WEEK, TransactionDate)
+    ORDER BY WeekNumber;
+END;
+GO
+
+-- SP: Top Customers by Purchase
+GO
+CREATE PROCEDURE sp_TopCustomers
+    @TopN INT = 10,
+    @StartDate DATE = NULL,
+    @EndDate DATE = NULL
+AS
+BEGIN
+    SELECT TOP (@TopN)
+        c.CustomerID,
+        c.CustomerCode,
+        c.CustomerName,
+        c.PhoneNumber,
+        COUNT(st.TransactionID) AS TotalOrders,
+        SUM(st.FinalAmount) AS TotalSpent,
+        l.LevelName
+    FROM Customer c
+    LEFT JOIN SalesTransaction st ON c.CustomerID = st.CustomerID
+    LEFT JOIN LevelUser l ON c.LevelID = l.LevelID
+    WHERE (@StartDate IS NULL OR st.TransactionDate >= @StartDate)
+        AND (@EndDate IS NULL OR st.TransactionDate <= @EndDate)
+        AND st.Status = N'Hoàn thành'
+    GROUP BY c.CustomerID, c.CustomerCode, c.CustomerName, c.PhoneNumber, l.LevelName
+    ORDER BY TotalSpent DESC;
+END;
+GO
+
+-- SP: Best Selling Products
+GO
+CREATE PROCEDURE sp_BestSellingProducts
+    @TopN INT = 10,
+    @StartDate DATE = NULL,
+    @EndDate DATE = NULL
+AS
+BEGIN
+    SELECT TOP (@TopN)
+        p.ProductID,
+        p.ProductCode,
+        p.ProductName,
+        pc.CategoryName,
+        SUM(gid.Quantity) AS TotalSold,
+        SUM(gid.TotalAmount) AS TotalRevenue,
+        AVG(gid.UnitPrice) AS AvgPrice
+    FROM Product p
+    INNER JOIN GoodsIssueDetail gid ON p.ProductID = gid.ProductID
+    INNER JOIN GoodsIssue gi ON gid.IssueID = gi.IssueID
+    LEFT JOIN ProductCategory pc ON p.CategoryID = pc.CategoryID
+    WHERE (@StartDate IS NULL OR gi.IssueDate >= @StartDate)
+        AND (@EndDate IS NULL OR gi.IssueDate <= @EndDate)
+        AND gi.Status = N'Đã xuất'
+    GROUP BY p.ProductID, p.ProductCode, p.ProductName, pc.CategoryName
+    ORDER BY TotalSold DESC;
+END;
+GO
+
+-- SP: Inventory Turnover Rate
+GO
+CREATE PROCEDURE sp_InventoryTurnover
+AS
+BEGIN
+    SELECT 
+        p.ProductID,
+        p.ProductCode,
+        p.ProductName,
+        i.TotalQuantityIn,
+        i.TotalQuantityOut,
+        i.ActualQuantity,
+        CASE 
+            WHEN i.TotalQuantityIn > 0 
+            THEN CAST(i.TotalQuantityOut AS DECIMAL(10,2)) / i.TotalQuantityIn * 100
+            ELSE 0
+        END AS TurnoverRate,
+        w.WarehouseName
+    FROM Product p
+    INNER JOIN Inventory i ON p.ProductID = i.ProductID
+    INNER JOIN Warehouse w ON i.WarehouseID = w.WarehouseID
+    WHERE i.TotalQuantityIn > 0
+    ORDER BY TurnoverRate DESC;
+END;
+GO
+
+-- =============================================
+-- SAMPLE DATA
+-- =============================================
+

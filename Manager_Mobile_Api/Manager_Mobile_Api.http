@@ -1,0 +1,6 @@
+@Manager_Mobile_Api_HostAddress = http://172.19.137.136:5232
+
+GET {{Manager_Mobile_Api_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

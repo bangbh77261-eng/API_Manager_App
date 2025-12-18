@@ -1,0 +1,295 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\kuro.bui\\Desktop\\AVG\\Manager_Mobile_Api\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{7DBEEF8D-7662-4CC2-A5AF-6CC3607EA525}|Manager_Mobile_Api\\Manager_Mobile_Api.csproj|c:\\users\\kuro.bui\\desktop\\avg\\manager_mobile_api\\manager_mobile_api\\controllers\\auth_login_controller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7DBEEF8D-7662-4CC2-A5AF-6CC3607EA525}|Manager_Mobile_Api\\Manager_Mobile_Api.csproj|solutionrelative:manager_mobile_api\\controllers\\auth_login_controller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7DBEEF8D-7662-4CC2-A5AF-6CC3607EA525}|Manager_Mobile_Api\\Manager_Mobile_Api.csproj|c:\\users\\kuro.bui\\desktop\\avg\\manager_mobile_api\\manager_mobile_api\\models\\user_models.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7DBEEF8D-7662-4CC2-A5AF-6CC3607EA525}|Manager_Mobile_Api\\Manager_Mobile_Api.csproj|solutionrelative:manager_mobile_api\\models\\user_models.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7DBEEF8D-7662-4CC2-A5AF-6CC3607EA525}|Manager_Mobile_Api\\Manager_Mobile_Api.csproj|c:\\users\\kuro.bui\\desktop\\avg\\manager_mobile_api\\manager_mobile_api\\controllers\\userrolescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7DBEEF8D-7662-4CC2-A5AF-6CC3607EA525}|Manager_Mobile_Api\\Manager_Mobile_Api.csproj|solutionrelative:manager_mobile_api\\controllers\\userrolescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7DBEEF8D-7662-4CC2-A5AF-6CC3607EA525}|Manager_Mobile_Api\\Manager_Mobile_Api.csproj|c:\\users\\kuro.bui\\desktop\\avg\\manager_mobile_api\\manager_mobile_api\\controllers\\viewcontroler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7DBEEF8D-7662-4CC2-A5AF-6CC3607EA525}|Manager_Mobile_Api\\Manager_Mobile_Api.csproj|solutionrelative:manager_mobile_api\\controllers\\viewcontroler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7DBEEF8D-7662-4CC2-A5AF-6CC3607EA525}|Manager_Mobile_Api\\Manager_Mobile_Api.csproj|c:\\users\\kuro.bui\\desktop\\avg\\manager_mobile_api\\manager_mobile_api\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7DBEEF8D-7662-4CC2-A5AF-6CC3607EA525}|Manager_Mobile_Api\\Manager_Mobile_Api.csproj|solutionrelative:manager_mobile_api\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7DBEEF8D-7662-4CC2-A5AF-6CC3607EA525}|Manager_Mobile_Api\\Manager_Mobile_Api.csproj|c:\\users\\kuro.bui\\desktop\\avg\\manager_mobile_api\\manager_mobile_api\\controllers\\userkeyscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7DBEEF8D-7662-4CC2-A5AF-6CC3607EA525}|Manager_Mobile_Api\\Manager_Mobile_Api.csproj|solutionrelative:manager_mobile_api\\controllers\\userkeyscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7DBEEF8D-7662-4CC2-A5AF-6CC3607EA525}|Manager_Mobile_Api\\Manager_Mobile_Api.csproj|c:\\users\\kuro.bui\\desktop\\avg\\manager_mobile_api\\manager_mobile_api\\controllers\\leveluserscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7DBEEF8D-7662-4CC2-A5AF-6CC3607EA525}|Manager_Mobile_Api\\Manager_Mobile_Api.csproj|solutionrelative:manager_mobile_api\\controllers\\leveluserscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7DBEEF8D-7662-4CC2-A5AF-6CC3607EA525}|Manager_Mobile_Api\\Manager_Mobile_Api.csproj|c:\\users\\kuro.bui\\desktop\\avg\\manager_mobile_api\\manager_mobile_api\\data\\datadbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7DBEEF8D-7662-4CC2-A5AF-6CC3607EA525}|Manager_Mobile_Api\\Manager_Mobile_Api.csproj|solutionrelative:manager_mobile_api\\data\\datadbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7DBEEF8D-7662-4CC2-A5AF-6CC3607EA525}|Manager_Mobile_Api\\Manager_Mobile_Api.csproj|c:\\users\\kuro.bui\\desktop\\avg\\manager_mobile_api\\manager_mobile_api\\dbrestore.txt||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{7DBEEF8D-7662-4CC2-A5AF-6CC3607EA525}|Manager_Mobile_Api\\Manager_Mobile_Api.csproj|solutionrelative:manager_mobile_api\\dbrestore.txt||{8B382828-6202-11D1-8870-0000F87579D2}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7DBEEF8D-7662-4CC2-A5AF-6CC3607EA525}|Manager_Mobile_Api\\Manager_Mobile_Api.csproj|c:\\users\\kuro.bui\\desktop\\avg\\manager_mobile_api\\manager_mobile_api\\models\\customer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7DBEEF8D-7662-4CC2-A5AF-6CC3607EA525}|Manager_Mobile_Api\\Manager_Mobile_Api.csproj|solutionrelative:manager_mobile_api\\models\\customer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7DBEEF8D-7662-4CC2-A5AF-6CC3607EA525}|Manager_Mobile_Api\\Manager_Mobile_Api.csproj|c:\\users\\kuro.bui\\desktop\\avg\\manager_mobile_api\\manager_mobile_api\\models\\warehouse.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7DBEEF8D-7662-4CC2-A5AF-6CC3607EA525}|Manager_Mobile_Api\\Manager_Mobile_Api.csproj|solutionrelative:manager_mobile_api\\models\\warehouse.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7DBEEF8D-7662-4CC2-A5AF-6CC3607EA525}|Manager_Mobile_Api\\Manager_Mobile_Api.csproj|c:\\users\\kuro.bui\\desktop\\avg\\manager_mobile_api\\manager_mobile_api\\models\\goodreceipt.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7DBEEF8D-7662-4CC2-A5AF-6CC3607EA525}|Manager_Mobile_Api\\Manager_Mobile_Api.csproj|solutionrelative:manager_mobile_api\\models\\goodreceipt.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7DBEEF8D-7662-4CC2-A5AF-6CC3607EA525}|Manager_Mobile_Api\\Manager_Mobile_Api.csproj|c:\\users\\kuro.bui\\desktop\\avg\\manager_mobile_api\\manager_mobile_api\\manager_mobile_api.http||{5703B403-55E7-4C63-8C88-A8F52C7A45C5}",
+      "RelativeMoniker": "D:0:0:{7DBEEF8D-7662-4CC2-A5AF-6CC3607EA525}|Manager_Mobile_Api\\Manager_Mobile_Api.csproj|solutionrelative:manager_mobile_api\\manager_mobile_api.http||{5703B403-55E7-4C63-8C88-A8F52C7A45C5}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7DBEEF8D-7662-4CC2-A5AF-6CC3607EA525}|Manager_Mobile_Api\\Manager_Mobile_Api.csproj|c:\\users\\kuro.bui\\desktop\\avg\\manager_mobile_api\\manager_mobile_api\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{7DBEEF8D-7662-4CC2-A5AF-6CC3607EA525}|Manager_Mobile_Api\\Manager_Mobile_Api.csproj|solutionrelative:manager_mobile_api\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7DBEEF8D-7662-4CC2-A5AF-6CC3607EA525}|Manager_Mobile_Api\\Manager_Mobile_Api.csproj|c:\\users\\kuro.bui\\desktop\\avg\\manager_mobile_api\\manager_mobile_api\\properties\\launchsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{7DBEEF8D-7662-4CC2-A5AF-6CC3607EA525}|Manager_Mobile_Api\\Manager_Mobile_Api.csproj|solutionrelative:manager_mobile_api\\properties\\launchsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7DBEEF8D-7662-4CC2-A5AF-6CC3607EA525}|Manager_Mobile_Api\\Manager_Mobile_Api.csproj|c:\\users\\kuro.bui\\desktop\\avg\\manager_mobile_api\\manager_mobile_api\\manager_mobile_api.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
+      "RelativeMoniker": "D:0:0:{7DBEEF8D-7662-4CC2-A5AF-6CC3607EA525}|Manager_Mobile_Api\\Manager_Mobile_Api.csproj|solutionrelative:manager_mobile_api\\manager_mobile_api.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 1,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{74946827-37a0-11d2-a273-00c04f8ef4ff}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "auth_login_controller.cs",
+              "DocumentMoniker": "C:\\Users\\kuro.bui\\Desktop\\AVG\\Manager_Mobile_Api\\Manager_Mobile_Api\\Controllers\\auth_login_controller.cs",
+              "RelativeDocumentMoniker": "Manager_Mobile_Api\\Controllers\\auth_login_controller.cs",
+              "ToolTip": "C:\\Users\\kuro.bui\\Desktop\\AVG\\Manager_Mobile_Api\\Manager_Mobile_Api\\Controllers\\auth_login_controller.cs",
+              "RelativeToolTip": "Manager_Mobile_Api\\Controllers\\auth_login_controller.cs",
+              "ViewState": "AgIAABYAAAAAAAAAAAAUwBwAAAANAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-16T06:29:09.214Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "UserKeysController.cs",
+              "DocumentMoniker": "C:\\Users\\kuro.bui\\Desktop\\AVG\\Manager_Mobile_Api\\Manager_Mobile_Api\\Controllers\\UserKeysController.cs",
+              "RelativeDocumentMoniker": "Manager_Mobile_Api\\Controllers\\UserKeysController.cs",
+              "ToolTip": "C:\\Users\\kuro.bui\\Desktop\\AVG\\Manager_Mobile_Api\\Manager_Mobile_Api\\Controllers\\UserKeysController.cs",
+              "RelativeToolTip": "Manager_Mobile_Api\\Controllers\\UserKeysController.cs",
+              "ViewState": "AgIAADQAAAAAAAAAAIAwwEYAAAAXAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-09T09:34:17.128Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\kuro.bui\\Desktop\\AVG\\Manager_Mobile_Api\\Manager_Mobile_Api\\Program.cs",
+              "RelativeDocumentMoniker": "Manager_Mobile_Api\\Program.cs",
+              "ToolTip": "C:\\Users\\kuro.bui\\Desktop\\AVG\\Manager_Mobile_Api\\Manager_Mobile_Api\\Program.cs",
+              "RelativeToolTip": "Manager_Mobile_Api\\Program.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAB8AAAAXAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-20T05:38:45.215Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "ViewControler.cs",
+              "DocumentMoniker": "C:\\Users\\kuro.bui\\Desktop\\AVG\\Manager_Mobile_Api\\Manager_Mobile_Api\\Controllers\\ViewControler.cs",
+              "RelativeDocumentMoniker": "Manager_Mobile_Api\\Controllers\\ViewControler.cs",
+              "ToolTip": "C:\\Users\\kuro.bui\\Desktop\\AVG\\Manager_Mobile_Api\\Manager_Mobile_Api\\Controllers\\ViewControler.cs",
+              "RelativeToolTip": "Manager_Mobile_Api\\Controllers\\ViewControler.cs",
+              "ViewState": "AgIAAAwAAAAAAAAAAAAAACIAAAAZAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-10T02:50:55.909Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "UserRolesController.cs",
+              "DocumentMoniker": "C:\\Users\\kuro.bui\\Desktop\\AVG\\Manager_Mobile_Api\\Manager_Mobile_Api\\Controllers\\UserRolesController.cs",
+              "RelativeDocumentMoniker": "Manager_Mobile_Api\\Controllers\\UserRolesController.cs",
+              "ToolTip": "C:\\Users\\kuro.bui\\Desktop\\AVG\\Manager_Mobile_Api\\Manager_Mobile_Api\\Controllers\\UserRolesController.cs",
+              "RelativeToolTip": "Manager_Mobile_Api\\Controllers\\UserRolesController.cs",
+              "ViewState": "AgIAAEcAAAAAAAAAAAAIwBUAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-09T08:56:54.322Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "LevelUsersController.cs",
+              "DocumentMoniker": "C:\\Users\\kuro.bui\\Desktop\\AVG\\Manager_Mobile_Api\\Manager_Mobile_Api\\Controllers\\LevelUsersController.cs",
+              "RelativeDocumentMoniker": "Manager_Mobile_Api\\Controllers\\LevelUsersController.cs",
+              "ToolTip": "C:\\Users\\kuro.bui\\Desktop\\AVG\\Manager_Mobile_Api\\Manager_Mobile_Api\\Controllers\\LevelUsersController.cs",
+              "RelativeToolTip": "Manager_Mobile_Api\\Controllers\\LevelUsersController.cs",
+              "ViewState": "AgIAAAMAAAAAAAAAAAAmwBgAAAAHAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-09T09:14:18.343Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "Manager_Mobile_Api.http",
+              "DocumentMoniker": "C:\\Users\\kuro.bui\\Desktop\\AVG\\Manager_Mobile_Api\\Manager_Mobile_Api\\Manager_Mobile_Api.http",
+              "RelativeDocumentMoniker": "Manager_Mobile_Api\\Manager_Mobile_Api.http",
+              "ToolTip": "C:\\Users\\kuro.bui\\Desktop\\AVG\\Manager_Mobile_Api\\Manager_Mobile_Api\\Manager_Mobile_Api.http",
+              "RelativeToolTip": "Manager_Mobile_Api\\Manager_Mobile_Api.http",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAA3AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003502|",
+              "WhenOpened": "2025-11-20T05:38:38.669Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "DataDbContext.cs",
+              "DocumentMoniker": "C:\\Users\\kuro.bui\\Desktop\\AVG\\Manager_Mobile_Api\\Manager_Mobile_Api\\Data\\DataDbContext.cs",
+              "RelativeDocumentMoniker": "Manager_Mobile_Api\\Data\\DataDbContext.cs",
+              "ToolTip": "C:\\Users\\kuro.bui\\Desktop\\AVG\\Manager_Mobile_Api\\Manager_Mobile_Api\\Data\\DataDbContext.cs",
+              "RelativeToolTip": "Manager_Mobile_Api\\Data\\DataDbContext.cs",
+              "ViewState": "AgIAAB0AAAAAAAAAAAAqwDMAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-20T05:46:44.844Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "User_Models.cs",
+              "DocumentMoniker": "C:\\Users\\kuro.bui\\Desktop\\AVG\\Manager_Mobile_Api\\Manager_Mobile_Api\\Models\\User_Models.cs",
+              "RelativeDocumentMoniker": "Manager_Mobile_Api\\Models\\User_Models.cs",
+              "ToolTip": "C:\\Users\\kuro.bui\\Desktop\\AVG\\Manager_Mobile_Api\\Manager_Mobile_Api\\Models\\User_Models.cs",
+              "RelativeToolTip": "Manager_Mobile_Api\\Models\\User_Models.cs",
+              "ViewState": "AgIAAF8AAAAAAAAAAAAxwFkAAAAoAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-20T05:55:45.851Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "DbRestore.txt",
+              "DocumentMoniker": "C:\\Users\\kuro.bui\\Desktop\\AVG\\Manager_Mobile_Api\\Manager_Mobile_Api\\DbRestore.txt",
+              "RelativeDocumentMoniker": "Manager_Mobile_Api\\DbRestore.txt",
+              "ToolTip": "C:\\Users\\kuro.bui\\Desktop\\AVG\\Manager_Mobile_Api\\Manager_Mobile_Api\\DbRestore.txt",
+              "RelativeToolTip": "Manager_Mobile_Api\\DbRestore.txt",
+              "ViewState": "AgIAAFgBAAAAAAAAAAAmwLsBAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003109|",
+              "WhenOpened": "2025-11-20T05:52:46.033Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 15,
+              "Title": "Manager_Mobile_Api.csproj",
+              "DocumentMoniker": "C:\\Users\\kuro.bui\\Desktop\\AVG\\Manager_Mobile_Api\\Manager_Mobile_Api\\Manager_Mobile_Api.csproj",
+              "RelativeDocumentMoniker": "Manager_Mobile_Api\\Manager_Mobile_Api.csproj",
+              "ToolTip": "C:\\Users\\kuro.bui\\Desktop\\AVG\\Manager_Mobile_Api\\Manager_Mobile_Api\\Manager_Mobile_Api.csproj",
+              "RelativeToolTip": "Manager_Mobile_Api\\Manager_Mobile_Api.csproj",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
+              "WhenOpened": "2025-11-20T05:40:17.685Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 14,
+              "Title": "launchSettings.json",
+              "DocumentMoniker": "C:\\Users\\kuro.bui\\Desktop\\AVG\\Manager_Mobile_Api\\Manager_Mobile_Api\\Properties\\launchSettings.json",
+              "RelativeDocumentMoniker": "Manager_Mobile_Api\\Properties\\launchSettings.json",
+              "ToolTip": "C:\\Users\\kuro.bui\\Desktop\\AVG\\Manager_Mobile_Api\\Manager_Mobile_Api\\Properties\\launchSettings.json",
+              "RelativeToolTip": "Manager_Mobile_Api\\Properties\\launchSettings.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABcAAAAgAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2025-11-21T07:55:46.395Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "GoodRECEIPT.cs",
+              "DocumentMoniker": "C:\\Users\\kuro.bui\\Desktop\\AVG\\Manager_Mobile_Api\\Manager_Mobile_Api\\Models\\GoodRECEIPT.cs",
+              "RelativeDocumentMoniker": "Manager_Mobile_Api\\Models\\GoodRECEIPT.cs",
+              "ToolTip": "C:\\Users\\kuro.bui\\Desktop\\AVG\\Manager_Mobile_Api\\Manager_Mobile_Api\\Models\\GoodRECEIPT.cs",
+              "RelativeToolTip": "Manager_Mobile_Api\\Models\\GoodRECEIPT.cs",
+              "ViewState": "AgIAAHsAAAAAAAAAAAAiwIgAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-09T08:12:52.441Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "Customer.cs",
+              "DocumentMoniker": "C:\\Users\\kuro.bui\\Desktop\\AVG\\Manager_Mobile_Api\\Manager_Mobile_Api\\Models\\Customer.cs",
+              "RelativeDocumentMoniker": "Manager_Mobile_Api\\Models\\Customer.cs",
+              "ToolTip": "C:\\Users\\kuro.bui\\Desktop\\AVG\\Manager_Mobile_Api\\Manager_Mobile_Api\\Models\\Customer.cs",
+              "RelativeToolTip": "Manager_Mobile_Api\\Models\\Customer.cs",
+              "ViewState": "AgIAAAcAAAAAAAAAAAA1wAcAAAAsAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-09T08:11:14.203Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "WareHouse.cs",
+              "DocumentMoniker": "C:\\Users\\kuro.bui\\Desktop\\AVG\\Manager_Mobile_Api\\Manager_Mobile_Api\\Models\\WareHouse.cs",
+              "RelativeDocumentMoniker": "Manager_Mobile_Api\\Models\\WareHouse.cs",
+              "ToolTip": "C:\\Users\\kuro.bui\\Desktop\\AVG\\Manager_Mobile_Api\\Manager_Mobile_Api\\Models\\WareHouse.cs",
+              "RelativeToolTip": "Manager_Mobile_Api\\Models\\WareHouse.cs",
+              "ViewState": "AgIAAFEAAAAAAAAAAAAAwDUAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-09T08:11:45.106Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
+              "Title": "appsettings.json",
+              "DocumentMoniker": "C:\\Users\\kuro.bui\\Desktop\\AVG\\Manager_Mobile_Api\\Manager_Mobile_Api\\appsettings.json",
+              "RelativeDocumentMoniker": "Manager_Mobile_Api\\appsettings.json",
+              "ToolTip": "C:\\Users\\kuro.bui\\Desktop\\AVG\\Manager_Mobile_Api\\Manager_Mobile_Api\\appsettings.json",
+              "RelativeToolTip": "Manager_Mobile_Api\\appsettings.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAAfAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2025-11-20T05:45:56.38Z"
+            }
+          ]
+        },
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": -1,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{d78612c7-9962-4b83-95d9-268046dad23a}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{34e76e81-ee4a-11d0-ae2e-00a0c90fffc3}"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
